@@ -65,7 +65,7 @@ func TestAggregator_NotDurationType(t *testing.T) {
 func TestAggregator_ProperAggregationKey(t *testing.T) {
 	metricChan, shutdownChan, aggregator := testPreparation()
 	//normal proper aggregation key found
-	aggregationInterval := 1 * time.Second
+	aggregationInterval := 3 * time.Second
 	tags := map[string]string{"d1key": "d1value", "d2key": "d2value", aggregationIntervalTagKey: aggregationInterval.String()}
 	fields := map[string]interface{}{"value": 1}
 	timestamp := time.Now()
@@ -85,7 +85,7 @@ func TestAggregator_MultipleAggregationPeriods(t *testing.T) {
 	metricChan, shutdownChan, aggregator := testPreparation()
 	//multiple metrics with multiple aggregation period, some aggregation period are the same, some are not.
 	timestamp := time.Now()
-	aggregationInterval := 1 * time.Second
+	aggregationInterval := 3 * time.Second
 
 	tags := map[string]string{"d1key": "d1value", "d2key": "d2value", aggregationIntervalTagKey: aggregationInterval.String()}
 	fields := map[string]interface{}{"value": 1}
