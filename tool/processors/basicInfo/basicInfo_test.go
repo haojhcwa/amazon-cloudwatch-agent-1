@@ -52,6 +52,10 @@ func TestWhichOS(t *testing.T) {
 	whichOS(ctx)
 	assert.Equal(t, util.OsTypeLinux, ctx.OsParameter)
 
+	testutil.Type(inputChan, "3")
+	whichOS(ctx)
+	assert.Equal(t, util.OsTypeDarwin, ctx.OsParameter)
+
 	testutil.Type(inputChan, "2")
 	whichOS(ctx)
 	assert.Equal(t, util.OsTypeWindows, ctx.OsParameter)

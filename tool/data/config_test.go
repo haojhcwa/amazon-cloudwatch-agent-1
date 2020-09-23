@@ -32,4 +32,22 @@ func TestConfig_ToMap(t *testing.T) {
 	key, value := conf.ToMap(ctx)
 	assert.Equal(t, expectedKey, key)
 	assert.Equal(t, expectedValue, value)
+
+	expectedValue = map[string]interface{}{
+		"agent": map[string]interface{}{},
+		"metrics": map[string]interface{}{
+			"append_dimensions": map[string]interface{}{"InstanceType": "${aws:InstanceType}", "AutoScalingGroupName": "${aws:AutoScalingGroupName}", "ImageId": "${aws:ImageId}", "InstanceId": "${aws:InstanceId}"}},
+		"logs": map[string]interface{}{}}
+	conf = new(Config)
+	ctx = &runtime.Context{
+		OsParameter:          util.OsTypeDarwin,
+		WantEC2TagDimensions: true,
+		IsOnPrem:             true,
+	}
+	conf.AgentConf()
+	conf.MetricsConf()
+	conf.LogsConf()
+	key, value = conf.ToMap(ctx)
+	assert.Equal(t, expectedKey, key)
+	assert.Equal(t, expectedValue, value)
 }

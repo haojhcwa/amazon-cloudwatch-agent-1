@@ -43,9 +43,12 @@ func whichOS(ctx *runtime.Context) {
 	if util.CurOS() == util.OsTypeWindows {
 		defaultOption = 2
 	}
+	if util.CurOS() == util.OsTypeDarwin {
+		defaultOption = 3
+	}
 	answer := util.Choice("On which OS are you planning to use the agent?",
 		defaultOption,
-		[]string{util.OsTypeLinux, util.OsTypeWindows})
+		[]string{util.OsTypeLinux, util.OsTypeWindows, util.OsTypeDarwin})
 	ctx.OsParameter = answer
 }
 
