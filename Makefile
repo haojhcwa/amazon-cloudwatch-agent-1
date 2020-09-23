@@ -61,7 +61,7 @@ config-downloader: copy-version-file
 	GOOS=darwin GOARCH=amd64 go build -ldflags="${LDFLAGS}" -o $(BUILD_SPACE)/bin/darwin_amd64/config-downloader github.com/aws/amazon-cloudwatch-agent/cmd/config-downloader
 
 test:
-	go test -v -failfast ./awscsm/... ./cfg/... ./cmd/... ./handlers/... ./internal/... ./logger/... ./logs/... ./metric/... ./plugins/... ./profiler/... ./tool/... ./translator/...
+	go test -v ./awscsm/... ./cfg/... ./cmd/... ./handlers/... ./internal/... ./logger/... ./logs/... ./metric/... ./plugins/... ./profiler/... ./tool/... ./translator/...
 
 clean::
 	rm -rf release/ build/

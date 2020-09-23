@@ -130,7 +130,7 @@ func TestAggregator_ShutdownBehavior(t *testing.T) {
 	metricChan, shutdownChan, aggregator := testPreparation()
 	// verify the remaining metrics can be read after shutdown
 	// the metrics should be available immediately after the shutdown even before aggregation period
-	aggregationInterval := 2 * time.Second
+	aggregationInterval := 3 * time.Second
 	tags := map[string]string{"d1key": "d1value", "d2key": "d2value", aggregationIntervalTagKey: aggregationInterval.String()}
 	fields := map[string]interface{}{"value": 1}
 	timestamp := time.Now()
@@ -138,7 +138,7 @@ func TestAggregator_ShutdownBehavior(t *testing.T) {
 	aggregator.AddMetric(m)
 
 	//give some time to aggregation to do the work
-	time.Sleep(time.Second * 2)
+	time.Sleep(2 * aggregationInterval)
 
 	close(shutdownChan)
 	wg.Wait()
